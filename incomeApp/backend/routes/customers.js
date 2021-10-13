@@ -29,8 +29,9 @@ router.get("/:id", async (req, res) => {
     const customer = await Customers.findOne({
       where: { id },
     });
-    if (customer == null) return res.status(404).send({ message: "Customer not found" });
-    
+    if (customer == null)
+      return res.status(404).send({ message: "Customer not found" });
+
     return res.json(customer);
   } catch (err) {
     console.log(err);
@@ -45,8 +46,9 @@ router.put("/:id", async (req, res) => {
     const customer = await Customers.findOne({
       where: { id },
     });
-    if ( customer == null ) return res.status(404).send({ message: "Customer not found" });
-    
+    if (customer == null)
+      return res.status(404).send({ message: "Customer not found" });
+
     customer.name = name;
     customer.nicNumber = nicNumber;
     customer.save();
@@ -63,7 +65,8 @@ router.delete("/:id", async (req, res) => {
     const customer = await Customers.findOne({
       where: { id },
     });
-    if ( customer == null ) return res.status(404).send({ message: "Customer not found" });
+    if (customer == null)
+      return res.status(404).send({ message: "Customer not found" });
     await customer.destroy();
     res.json({ message: "Customer Deleted!" });
   } catch (err) {

@@ -1,12 +1,12 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend implementation of PS application",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "",
+  "author": "keerthu",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

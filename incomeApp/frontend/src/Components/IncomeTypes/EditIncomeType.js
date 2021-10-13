@@ -3,15 +3,18 @@ import { IncomeTypesContext } from "../../Context/IncomeTypesContext";
 import UseForm from "../../Hooks/UseForm";
 import { useHistory } from "react-router-dom";
 
-const AddIncomeType = () => {
+const EditIncomeType = (props) => {
+  const incomeTypetoUpdate = props.location.state || {};
   const history = useHistory();
-  const { formData: incomeType, handleField: setField } = UseForm({});
-  const { addIncomeTypes } = useContext(IncomeTypesContext);
+  const { formData: incomeType, handleField: setField } = UseForm({
+    initialFormData: incomeTypetoUpdate,
+  });
+  const { editIncomeType } = useContext(IncomeTypesContext);
 
   return (
     <div className="container p-3">
       <form>
-        <h4 className="customText mb-4">Add new income type</h4>
+        <h4 className="customText mb-4">Edit income type</h4>
         <div className="form-input-group mt-3">
           <label>Income type name</label>
           <input
@@ -19,6 +22,7 @@ const AddIncomeType = () => {
             placeholder="Enter income type name"
             type="text"
             name="name"
+            value={incomeType.name}
             onChange={setField}
           />
         </div>
@@ -28,6 +32,7 @@ const AddIncomeType = () => {
             className="form-control"
             placeholder="Enter income type symbol"
             type="text"
+            value={incomeType.symbol}
             name="symbol"
             onChange={setField}
           />
@@ -36,7 +41,7 @@ const AddIncomeType = () => {
           className="btn float-right mt-4 customButton"
           onClick={async (e) => {
             e.preventDefault();
-            await addIncomeTypes(incomeType).then(
+            await editIncomeType(incomeType).then(
               history.push("/incometypes/list")
             );
           }}
@@ -48,4 +53,4 @@ const AddIncomeType = () => {
   );
 };
 
-export default AddIncomeType;
+export default EditIncomeType;

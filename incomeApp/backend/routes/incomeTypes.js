@@ -17,7 +17,8 @@ router.post("/", async (req, res) => {
   const { name, symbol } = req.body;
   try {
     const { error } = incomTypeValidation(req.body);
-    if (error) return res.status(400).send({ message: error.details[0].message });
+    if (error)
+      return res.status(400).send({ message: error.details[0].message });
     const incomeType = await IncomeTypes.create({ name, symbol });
     return res.json(incomeType);
   } catch (error) {
@@ -32,7 +33,8 @@ router.get("/:id", async (req, res) => {
     const incomeType = await IncomeTypes.findOne({
       where: { id },
     });
-    if ( incomeType == null ) return res.status(404).send({ message: "Income Type not found" });
+    if (incomeType == null)
+      return res.status(404).send({ message: "Income Type not found" });
     return res.json(incomeType);
   } catch (err) {
     console.log(err);
@@ -47,10 +49,12 @@ router.put("/:id", async (req, res) => {
     const incomeType = await IncomeTypes.findOne({
       where: { id },
     });
-    if (incomeType == null)  res.status(404).send({message: "Income type not found!"});
+    if (incomeType == null)
+      res.status(404).send({ message: "Income type not found!" });
 
     const { error } = incomTypeValidation(req.body);
-    if (error) return res.status(400).send({ message: error.details[0].message });
+    if (error)
+      return res.status(400).send({ message: error.details[0].message });
 
     incomeType.name = name;
     incomeType.symbol = symbol;
@@ -68,8 +72,9 @@ router.delete("/:id", async (req, res) => {
     const incomeType = await IncomeTypes.findOne({
       where: { id },
     });
-    if ( incomeType == null ) return res.status(404).send({ message: "Income Type not found" });
-    
+    if (incomeType == null)
+      return res.status(404).send({ message: "Income Type not found" });
+
     await incomeType.destroy();
     return res.json({ message: "IncomeType Deleted!" });
   } catch (err) {

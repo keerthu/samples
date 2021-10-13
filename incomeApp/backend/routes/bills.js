@@ -13,12 +13,13 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { payerName, billNo, billingDate, registryPageNo, otherIncomes } = req.body;
+  const { payerName, billNo, billingDate, registryPageNo, otherIncomes } =
+    req.body;
   try {
     const bill = await Bills.create({
       payerName,
       billNo,
-      billingDate: billingDate,
+      billingDate,
       registryPageNo,
       otherIncomes,
     });
@@ -35,7 +36,8 @@ router.get("/:id", async (req, res) => {
     const bill = await Bills.findOne({
       where: { id },
     });
-    if ( bill == null ) return res.status(404).send({ message: "Bill not found" });
+    if (bill == null)
+      return res.status(404).send({ message: "Bill not found" });
     return res.json(bill);
   } catch (err) {
     console.log(err);
@@ -50,7 +52,8 @@ router.put("/:id", async (req, res) => {
     const bill = await Bills.findOne({
       where: { id },
     });
-    if ( bill == null ) return res.status(404).send({ message: "Bill not found" });
+    if (bill == null)
+      return res.status(404).send({ message: "Bill not found" });
     bill.name = name;
     bill.symbol = symbol;
     bill.save();
@@ -67,7 +70,8 @@ router.delete("/:id", async (req, res) => {
     const bill = await Bills.findOne({
       where: { id },
     });
-    if ( bill == null ) return res.status(404).send({ message: "Income Type not found" });
+    if (bill == null)
+      return res.status(404).send({ message: "Income Type not found" });
     await bill.destroy();
     res.json({ message: "IncomeType Deleted!" });
   } catch (err) {

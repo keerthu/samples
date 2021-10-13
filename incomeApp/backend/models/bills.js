@@ -24,9 +24,7 @@ module.exports = (sequelize, DataTypes) => {
           );
         },
         set(val) {
-          const da = moment(val).format(
-            "MM/DD/YYYY h:mm:ss"
-          );
+          const da = moment(val).format("MM/DD/YYYY h:mm:ss");
           this.setDataValue("billingDate", da);
         },
         inclusive: false,
